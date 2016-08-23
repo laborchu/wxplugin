@@ -17,7 +17,7 @@
 
 ## 反馈
 
-如果安装后无效或者微信闪退情况，可以进入**https://github.com/laborchu/cxplugin**提交issue，并说明设备版本，系统版本以及微信的版本，我会尽可能的修复
+如果安装后无效或者微信闪退情况，可以进入**https://github.com/laborchu/wxplugin**提交issue，并说明设备版本，系统版本以及微信的版本，我会尽可能的修复
 
 ## 特别感谢
 [iOS应用逆向工程]的作者（[狗神](https://github.com/iosre)）
