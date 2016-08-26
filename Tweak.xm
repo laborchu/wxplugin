@@ -48,14 +48,18 @@
 	%orig;	
 	switch(wrap.m_uiMessageType) {
 	case 49: {
-		UIViewController *curCtrl = [[[[objc_getClass("CAppViewControllerManager") topMostController] currentViewController] viewControllers] lastObject];
-		if ([curCtrl isKindOfClass:[objc_getClass("BaseMsgContentViewController") class]]) {
-			BaseMsgContentViewController *msgCtrl = (BaseMsgContentViewController *)curCtrl;
-			if ([msg isEqualToString:[msgCtrl getCurrentChatName]]) {
-				WCRedEnvelopesControlData *ctrlData = [[objc_getClass("WCRedEnvelopesControlData") alloc] init];
-				[ctrlData setM_oSelectedMessageWrap:wrap];
-				WCRedEnvelopesReceiveControlLogic *logic = [[objc_getClass("WCRedEnvelopesReceiveControlLogic") alloc] initWithData:ctrlData];
-				[logic WCRedEnvelopesReceiveHomeViewOpenRedEnvelopes];
+		CContactMgr *contactManager = [[objc_getClass("MMServiceCenter") defaultCenter] getService:[objc_getClass("CContactMgr") class]];
+		CContact *selfContact = [contactManager getSelfContact];
+		if (![wrap.m_nsFromUsr isEqualToString:selfContact.m_nsUsrName]) {
+			UIViewController *curCtrl = [[[[objc_getClass("CAppViewControllerManager") topMostController] currentViewController] viewControllers] lastObject];
+			if ([curCtrl isKindOfClass:[objc_getClass("BaseMsgContentViewController") class]]) {
+				BaseMsgContentViewController *msgCtrl = (BaseMsgContentViewController *)curCtrl;
+				if ([msg isEqualToString:[msgCtrl getCurrentChatName]]) {
+					WCRedEnvelopesControlData *ctrlData = [[objc_getClass("WCRedEnvelopesControlData") alloc] init];
+					[ctrlData setM_oSelectedMessageWrap:wrap];
+					WCRedEnvelopesReceiveControlLogic *logic = [[objc_getClass("WCRedEnvelopesReceiveControlLogic") alloc] initWithData:ctrlData];
+					[logic WCRedEnvelopesReceiveHomeViewOpenRedEnvelopes];
+				}
 			}
 		}
 		break;
